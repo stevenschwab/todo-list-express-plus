@@ -4,7 +4,11 @@ module.exports = {
     getTodos: async (req, res) => {
         console.log(req.user)
         try {
-            const todoItems = await Todo.find() //talking to the db, mongoose returns an array of objects
+            const todoItems = await Todo.find(
+                { 
+                    microsoftId: req.user.microsoftId 
+                }
+            ) //talking to the db, mongoose returns an array of objects
             const itemsLeft = await Todo.countDocuments(
                 {
                     microsoftId: req.user.microsoftId,

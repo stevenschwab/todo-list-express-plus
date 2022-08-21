@@ -3,7 +3,7 @@ module.exports = {
         if (req.isAuthenticated()) { // if user is logged in, kick them to the controller
             return next();
         } else {
-            res.redirect('/');
+            res.redirect('/auth/login');
         }
     },
     ensureGuest: function (req, res, next) {

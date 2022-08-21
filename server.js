@@ -3,7 +3,7 @@ const app = express()
 const mongoose = require('mongoose') // Using mongoose to help me with my models and talking to my DB
 const passport = require('passport') // Using passport to talk with Microsoft's identity platform
 const session = require('express-session') // To stay logged in
-const MongoStore = require('connect-mongo')(session) // To stay logged in
+const MongoStore = require('connect-mongo') // Passing session to db
 const connectDB = require('./config/database') // db file inside of config folder which enables connection to mongo DB
 const authRoutes = require('./routes/auth') // look at requests and determine which controller to use
 const homeRoutes = require('./routes/home') // look at requests and determine which controller to use
@@ -23,10 +23,15 @@ app.use(express.json()) // look at data coming along with each of our requests
 // Sessions, keeping users logged in
 app.use(
     session({
-        secret: 'keyboard cat',
+        secret: 'democloseyoureyes',
         resave: false,
         saveUninitialized: false,
-        store: new MongoStore({ mongooseConnection: mongoose.connection }), // keep track of sessions in db
+        store: new MongoStore(
+            { 
+                mongoUrl: mongoose.connection._connectionString, 
+                mongoOptions: {} 
+            }
+        ), // keep track of sessions in db
     })
 )
 

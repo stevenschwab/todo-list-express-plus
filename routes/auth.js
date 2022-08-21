@@ -51,13 +51,15 @@ router.post('/openid/return',
     }
 );
 
-router.get('/logout', 
-    function(req, res) {
-        req.session.destroy(function(err) {
-            req.logOut();
-            res.redirect(config.destroySessionUrl);
-        });
-    }
-);
+router.get('/logout', function(req, res, next){
+    req.session.destroy(function(err) {
+      req.logOut(function(err) {
+        if (err) {
+          return next(err);
+        }
+      });
+      res.redirect(config.destroySessionUrl);
+    });
+});
 
 module.exports = router
