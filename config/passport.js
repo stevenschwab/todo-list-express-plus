@@ -1,6 +1,5 @@
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy // require strategy
 const mongoose = require('mongoose') // access to mongoose in case we need it
-const passport = require('passport')
 const config = require('../config/config') // ask for config file to get secrets
 const User = require('../models/User') // talk to db
 

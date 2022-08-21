@@ -6,3 +6,7 @@ h1{
     text-decoration: line-through;
     color: gray;
 }
+
+.notCompleted{
+    text-decoration: underline;
+}

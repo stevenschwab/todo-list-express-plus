@@ -23,7 +23,7 @@ app.use(express.json()) // look at data coming along with each of our requests
 // Sessions, keeping users logged in
 app.use(
     session({
-        secret: 'democloseyoureyes',
+        secret: 'keyboard cat',
         resave: false,
         saveUninitialized: false,
         store: new MongoStore(
