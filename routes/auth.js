@@ -52,8 +52,8 @@ router.post('/openid/return',
 );
 
 router.get('/logout', function(req, res, next){
-    req.session.destroy(function(err) {
-      req.logOut(function(err) {
+    req.session.destroy((err) => {
+      req.logOut((err) => {
         if (err) {
           return next(err);
         }

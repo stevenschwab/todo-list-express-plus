@@ -20,16 +20,18 @@ app.use(express.static('public')) // enables static files to serve on express be
 app.use(express.urlencoded({ extended: true })) // look at data coming along with each of our requests
 app.use(express.json()) // look at data coming along with each of our requests
 
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
 // Sessions, keeping users logged in
 app.use(
     session({
         secret: 'keyboard cat',
         resave: false,
         saveUninitialized: false,
-        store: new MongoStore(
+        cookie: { maxAge: oneDay },
+        store: MongoStore.create(
             { 
-                mongoUrl: mongoose.connection._connectionString, 
-                mongoOptions: {} 
+                mongoUrl: process.env.DB_STRING  //(URI FROM.env file)
             }
         ), // keep track of sessions in db
     })
